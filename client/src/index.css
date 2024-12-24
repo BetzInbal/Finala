@@ -19,8 +19,8 @@
   grid-template-rows: 15% auto;
   grid-template-columns: minmax(100px, 20%) auto;
   grid-template-areas:
-    'logo header'
-    'nav pages';
+    'nav nav'
+    'pages pages';
 }
 
 .logo {
@@ -44,6 +44,8 @@
 }
 .nav {
   grid-area: nav;
+  display: flex;
+  flex-direction: row;
 }
 .pages {
   grid-area: pages;
