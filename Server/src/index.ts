@@ -6,6 +6,7 @@ import analysisRoute from "./routes/analysis.route";
 import relationshipsRoute from "./routes/relationships.route";
 ;
 import cors from "cors";
+import { getByTypes } from "./services/crud.service";
 
 
 
@@ -15,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use("/api/:_id", getByTypes);
 app.use("/api/analysis", analysisRoute);
 app.use("/api/relationships", relationshipsRoute);
 

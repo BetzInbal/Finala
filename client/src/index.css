@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arimo", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 15% auto;
+  grid-template-columns: minmax(100px, 20%) auto;
+  grid-template-areas:
+    'logo header'
+    'nav pages';
+}
+
+.logo {
+  grid-area: logo;
+  background-color: wheat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo > img {
+  height: 70%;
+}
+
+.header {
+  grid-area: header;
+  background-color: wheat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav {
+  grid-area: nav;
+}
+.pages {
+  grid-area: pages;
+  background-color: whitesmoke;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+  padding: 30px;
+}
+
+.loading {
+  position: fixed;
+  right: 40%;
+  top: 55%;
+  z-index: 900;
+}
+
+.charts-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.incident-charts-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.filter {
+  width: 150px;
+}
+
+.marke-coordinates {
+}
+
+.create-attack-form {
+  background-color: rgba(255, 255, 255, 0.842);
+  border-radius: 10px;
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.myInput {
+  width: 90%;
+}
+
+.create-attack{
+  background-image: url(https://cbx-prod.b-cdn.net/COLOURBOX19914592.jpg?width=1200&height=1200&quality=70);
+}

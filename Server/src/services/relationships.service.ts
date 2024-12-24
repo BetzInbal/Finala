@@ -47,10 +47,9 @@ export const getOrgByYearsServ = async () => {
       $project: {
         year: 1,
         total_incidents:1,
-        arr_incidents: {$sortArray: { input: "$incidents", sortBy: { total_incidents: -1 } }}
+        arr_incidents: {$sortArray: { input: "$arr_incidents", sortBy: { total_incidents: -1 } }}
       }
     }])  
-    console.log(result);
     return result;
   } catch (err) {
     console.error(err);

@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Double } from "mongoose";
 
 
 export interface IEvent extends Document {
-    _id:any,
+    _id: any,
     eventid: number,
     iyear: number,
     imonth: number,
@@ -39,22 +39,26 @@ const EventSchema = new Schema<IEvent>({
         type: Number
     },
     country_txt: {
-        type: String
+        type: String,
+        default: "Unknown"
     },
     region_txt: {
-        type: String
+        type: String,
+        default: "Unknown"
     },
     city: {
-        type: String
+        type: String,
+        default: "Unknown"
     },
     latitude: {
-        type: Number 
+        type: Number
     },
     longitude: {
         type: Number
     },
     attacktype1_txt: {
-        type: String
+        type: String,
+        default: "Unknown"
     },
     targtype1_txt: {
         type: String
@@ -63,7 +67,8 @@ const EventSchema = new Schema<IEvent>({
         type: String
     },
     gname: {
-        type: String
+        type: String,
+        default: "Unknown"
     },
     weaptype1_txt: {
         type: String
@@ -79,6 +84,7 @@ const EventSchema = new Schema<IEvent>({
     },
     summary: {
         type: String,
+        default: ""
     }
 });
 

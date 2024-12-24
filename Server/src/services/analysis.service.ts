@@ -33,7 +33,6 @@ export const getAreaAverageServ = async () => {
         "avg": -1
       }
     }])
-    console.log(result);
     return result;
     
   } catch (err) {
@@ -53,7 +52,6 @@ export const getPeriodicTrendsServ = async () => {
         month: 1
       }
     }])  
-    console.log(result);
     return result;
   } catch (err) {
     console.error(err);

@@ -5,7 +5,7 @@ import { getDedlyOrg, getFiveAll, getOrgByYears
 const router = Router();
 
 router.get("/top-groups", getFiveAll);
-router.get("//groups-by-year", getOrgByYears);
+router.get("/groups-by-year", getOrgByYears);
 router.get("/deadliest-regions", getDedlyOrg);
 
 export default router;

@@ -1,6 +1,7 @@
 import fs from "fs/promises"
 import eventModel, { IEvent } from "../models/eventModel";
 import createAnlists from "../utils/createAnlists";
+import { error } from "console";
 
 
 
@@ -20,16 +21,16 @@ export const getFileData = async <T>(): Promise<T[]> => {
 
 export default async ()=>{
   try {
-    const event = await eventModel.findOne()
+    const event = await eventModel.findOne({})    
     if(event){
       console.log("[database] DB id full");
       return 
     }
-    console.log("[database] Inserts the original information into DB");
-    await seed()
+      console.log("[database] Inserts the original information into DB");
+      await seed()
+    
   } catch (error) {
     console.log(error);
-    
   }
 
 }
