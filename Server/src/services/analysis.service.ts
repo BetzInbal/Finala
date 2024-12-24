@@ -2,8 +2,6 @@ import AreaModel from "../models/AreaModel";
 //import "../models/location.model";
 import Typemodel, { IType } from "../models/Typemodel";
 import sortBy from 'lodash/sortBy';
-import YearModel from "../models/YearModel";
-import { areas } from "../config/seed";
 
 export const getByTypeServ = async () => {
   try {

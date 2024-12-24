@@ -2,12 +2,10 @@
 import eventModel, { IEvent } from "../models/eventModel";
 import Typemodel, { IType } from "../models/Typemodel";
 import AreaModel, { IArea } from "../models/AreaModel";
-import YearModel, { IYear } from "../models/YearModel";
 import YearOrgModel, { IYearOrg } from "../models/YearOrgModel";
 
 const types:IType[] = []
 const areas:IArea[] = []
-const yers:IYear[] = []
 const yearsOrg:IYearOrg[] = []
 const events:IEvent[] = []
 

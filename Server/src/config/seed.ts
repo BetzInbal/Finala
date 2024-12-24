@@ -2,8 +2,7 @@ import fs from "fs/promises"
 import eventModel, { IEvent } from "../models/eventModel";
 import Typemodel, { IType } from "../models/Typemodel";
 import AreaModel, { IArea } from "../models/AreaModel";
-import YearModel, { IYear } from "../models/YearModel";
-import createAnlists, { totnk, totnw } from "../utils/createAnlists";
+import createAnlists from "../utils/createAnlists";
 import { IYearOrg } from "../models/YearOrgModel";
 
 
@@ -34,42 +33,12 @@ export default async ()=>{
 
 }
 
-export const types:IType[] = []
-export const areas:IArea[] = []
-export const yers:IYear[] = []
-export const yearsOrg:IYearOrg[] = []
 
 
 export const seed = async () => {
-  
-  
     const data = await  getFileData<IEvent>()
          if (!data.length) throw new Error("Failed to read JSON file");
-         for (const event of data) {
-           await createAnlists(event)
-         }
-         console.log("after listed");
-        try {
-          
-          await AreaModel.insertMany(areas)
-        } catch (error) {
-          console.error(error)
-          }
+           await createAnlists(data)
+        console.log("after DB id full");
         
-        console.log("after insert");
-        
-        //await YearModel.insertMany(yers)
 }
-
-
-// eventModel.aggregate(
-//   [
-//   {$group:{
-//   _id: "expression",
-//   "fieldN": {
-//     $sum: "$nwound"
-//   }
-// }}
-// ]
-// )
-//        console.log(data);
