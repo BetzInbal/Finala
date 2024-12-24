@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use("/api/analysis", analysisRoute);
-//app.use("/api/relationships", relationshipsRoute);
+app.use("/api/relationships", relationshipsRoute);
 
 // Error handeling
 app.use(async ( req: Request, res: Response) => {

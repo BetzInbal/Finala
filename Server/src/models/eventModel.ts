@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, Double } from "mongoose";
 
 
 export interface IEvent extends Document {
+    _id:any,
     eventid: number,
     iyear: number,
     imonth: number,

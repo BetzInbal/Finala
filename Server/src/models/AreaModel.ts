@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 
-interface incidents {
+export interface incidents {
     gname: string,
     total_incidents: number
     total_damage: number

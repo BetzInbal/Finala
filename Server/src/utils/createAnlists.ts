@@ -2,10 +2,12 @@
 import eventModel, { IEvent } from "../models/eventModel";
 import Typemodel, { IType } from "../models/Typemodel";
 import AreaModel, { IArea } from "../models/AreaModel";
+import YearModel, { IYear } from "../models/YearModel";
 import YearOrgModel, { IYearOrg } from "../models/YearOrgModel";
 
 const types:IType[] = []
 const areas:IArea[] = []
+const yers:IYear[] = []
 const yearsOrg:IYearOrg[] = []
 const events:IEvent[] = []
 
@@ -24,33 +26,34 @@ const insertToTypes = async (event: IEvent) => {
     }
 }
 
-const insertToArieas = async (event: IEvent) => {
-        try {
-            const area = areas.find((a)=> a.area === (event.country_txt || "Unknown")) ||
-            areas[areas.push(new AreaModel({
-                area:  (event.country_txt || "Unknown"),
-                latitude: event.latitude,
-                longitude: event.longitude
-            }))-1]
 
-            const incidents = area.incidents.find((i) => i.gname === event.gname) ||
-            area.incidents[area.incidents.push({
-                gname: event.gname,
-                total_damage: 0,
-                total_incidents: 0
-            })-1]
-    
-            incidents.total_damage += (event.nkill + event.nwound)
-            incidents.total_incidents++
-            area.latitude = area.latitude ? area.latitude : event.latitude;
-            area.longitude = area.longitude ? area.longitude : event.longitude;
-            area.total_damage+= event.nkill + event.nwound
-            area.total_incidents++
-            area.avg = area.total_damage / area.total_incidents
-        } catch (error) {
-            console.log("[insertToArieas]")
-            console.error(error);
-        }
+const insertToArieas = async (event: IEvent) => {
+    try {
+        const area = areas.find((a)=> a.area === (event.country_txt || "Unknown")) ||
+        areas[areas.push(new AreaModel({
+            area:  (event.country_txt || "Unknown"),
+            latitude: event.latitude,
+            longitude: event.longitude
+        }))-1]
+
+        const incidents = area.incidents.find((i) => i.gname === event.gname) ||
+        area.incidents[area.incidents.push({
+            gname: event.gname,
+            total_damage: 0,
+            total_incidents: 0
+        })-1]
+
+        incidents.total_damage += (event.nkill + event.nwound)
+        incidents.total_incidents++
+        area.latitude = area.latitude ? area.latitude : event.latitude;
+        area.longitude = area.longitude ? area.longitude : event.longitude;
+        area.total_damage+= event.nkill + event.nwound
+        area.total_incidents++
+        area.avg = area.total_damage / area.total_incidents
+    } catch (error) {
+        console.log("[insertToArieas]")
+        console.error(error);
+    }
 
 }
 
@@ -77,6 +80,7 @@ const insertToIYearOrg = async (event: IEvent) => {
     }
 
 }
+
 
 export default async (data: IEvent[]) => {
     for (const event of data) {

@@ -1,20 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import {
-  getFifthAll,
-  getFifthByOarg,
-  getFifthByYear,
-  getForthAll,
-  getForthArea,
-  getSixthArea,
+import {  getDedlyOrgServ,  getFiveAllServ,  getOrgByYearsServ
 } from "../services/relationships.service";
 
-export const getForthDataAll = async (
+export const getFiveAll = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const result = await getForthAll();
+    const result = await getFiveAllServ();
     res.json(result);
   } catch (err) {
     console.error("Can't get expenses data", err);
@@ -22,13 +16,13 @@ export const getForthDataAll = async (
   }
 };
 
-export const getForthDataReg = async (
+export const getOrgByYears = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const result = await getForthArea(req.body.reg);
+    const result = await getOrgByYearsServ();
     res.json(result);
   } catch (err) {
     console.error("Can't get expenses data", err);
@@ -36,55 +30,13 @@ export const getForthDataReg = async (
   }
 };
 
-export const getFifthDataAll = async (
+export const getDedlyOrg = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const result = await getFifthAll();
-    res.json(result);
-  } catch (err) {
-    console.error("Can't get expenses data", err);
-    next(err);
-  }
-};
-
-export const getFifthDataOarg = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const result = await getFifthByOarg(req.body.oarg);
-    res.json(result);
-  } catch (err) {
-    console.error("Can't get expenses data", err);
-    next(err);
-  }
-};
-
-export const getFifthDataYear = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const result = await getFifthByYear(req.body.year);
-    res.json(result);
-  } catch (err) {
-    console.error("Can't get expenses data", err);
-    next(err);
-  }
-};
-
-export const getSixthData = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const result = await getSixthArea(req.body.oarg);
+    const result = await getDedlyOrgServ();
     res.json(result);
   } catch (err) {
     console.error("Can't get expenses data", err);

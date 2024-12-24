@@ -1,12 +1,13 @@
 
 import AreaModel from "../models/AreaModel";
 import YearOrgModel from "../models/YearOrgModel";
+import { IDedlyOrgDto, IFiveAllDto, IOrgByYearsDto } from "../types/Dtos";
 
 
-
+// return IFiveAllDto[]
 export const getFiveAllServ = async () => {
   try {
-    const result = await AreaModel.aggregate([{
+    const result:IFiveAllDto[] = await AreaModel.aggregate([{
       $project: {
         "area": 1,
         "latitude": 1,
@@ -38,9 +39,11 @@ return result;
 }
 };
 
+
+// return IOrgByYearsDto[]y
 export const getOrgByYearsServ = async () => {
   try {
-    const result = await YearOrgModel.aggregate([{
+    const result:IOrgByYearsDto[] = await YearOrgModel.aggregate([{
       $project: {
         year: 1,
         total_incidents:1,
@@ -55,16 +58,16 @@ export const getOrgByYearsServ = async () => {
   }
 };
 
-
+// return IDedlyOrgDto[]
 export const getDedlyOrgServ = async () => {
   try {
-    const result = await AreaModel.aggregate([{
-      $project: {
-      "area": 1,
-      "latitude": 1,
-      "longitude": 1,
-      "incidents":{$slice: [ {$sortArray: { input: "$incidents", sortBy: { total_damage: -1 } }},1]}
-    }}
+      const result:IDedlyOrgDto[] = await AreaModel.aggregate([{
+        $project: {
+        "area": 1,
+        "latitude": 1,
+        "longitude": 1,
+        "incidents":{$slice: [ {$sortArray: { input: "$incidents", sortBy: { total_damage: -1 } }},1]}
+      }}
 ]);
     return result;
   } catch (err) {

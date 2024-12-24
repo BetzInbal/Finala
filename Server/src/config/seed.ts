@@ -1,9 +1,6 @@
 import fs from "fs/promises"
 import eventModel, { IEvent } from "../models/eventModel";
-import Typemodel, { IType } from "../models/Typemodel";
-import AreaModel, { IArea } from "../models/AreaModel";
 import createAnlists from "../utils/createAnlists";
-import { IYearOrg } from "../models/YearOrgModel";
 
 
 
@@ -22,23 +19,26 @@ export const getFileData = async <T>(): Promise<T[]> => {
 };
 
 export default async ()=>{
-  const event = await eventModel.findOne()
-  if(event){
-    console.log("[database] DB id full");
-    //return 
+  try {
+    const event = await eventModel.findOne()
+    if(event){
+      console.log("[database] DB id full");
+      return 
+    }
+    console.log("[database] Inserts the original information into DB");
+    await seed()
+  } catch (error) {
+    console.log(error);
+    
   }
-  console.log("[database] Inserts the original information into DB");
-  await seed()
-
 
 }
 
 
 
+
 export const seed = async () => {
     const data = await  getFileData<IEvent>()
-         if (!data.length) throw new Error("Failed to read JSON file");
-           await createAnlists(data)
-        console.log("after DB id full");
-        
+        if (!data.length) throw new Error("Failed to read JSON file");
+        await createAnlists(data)
 }

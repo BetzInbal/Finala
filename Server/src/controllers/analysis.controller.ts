@@ -14,6 +14,8 @@ export const getByTypes = async (
     next(err);
   }
 };
+
+
 export const getAreaAverage = async (
   req: Request,
   res: Response,
