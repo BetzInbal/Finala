@@ -1,18 +1,19 @@
 import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IFiveAllDto, IFiveAllSafe } from "../types/safeTypes";
+import { AttackYearSafe, IOrgByYearsDto } from "../types/safeTypes";
 
-const initialState: IFiveAllSafe = {
+const initialState: AttackYearSafe = {
     error: false,
     loading: true,
     data: [],
 };
+
 export const base_url = "http://localhost:3000/api" //  `${base_url}/`
 
-export const fetchFiveAll = createAsyncThunk(
-    "fiveAll/getList",
+export const fetchAttackYear = createAsyncThunk(
+    "attackYear/getList",
     async (_, thunkApi) => {
         try {
-            const res = await fetch(`${base_url}/relationships/top-groups`);
+            const res = await fetch(`${base_url}//relationships/groups-by-year`);
             if (res.status !== 200) {
                 return thunkApi.rejectWithValue("Can't get the list, please try again");
             }
@@ -24,23 +25,23 @@ export const fetchFiveAll = createAsyncThunk(
     }
 );
 
-const fiveAllSlice = createSlice({
-    name: "fiveAll",
+const attackYearSlice = createSlice({
+    name: "attackYear",
     initialState,
     reducers: {},
-    extraReducers: (builder: ActionReducerMapBuilder<IFiveAllSafe>) => {
+    extraReducers: (builder: ActionReducerMapBuilder<AttackYearSafe>) => {
         builder
-            .addCase(fetchFiveAll.pending, (state) => {
+            .addCase(fetchAttackYear.pending, (state) => {
                 state.loading = true;
                 state.error = false;
                 state.data = [];
             })
-            .addCase(fetchFiveAll.fulfilled, (state, action) => {
+            .addCase(fetchAttackYear.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = false;
-                state.data = action.payload as unknown as IFiveAllDto[];
+                state.data = action.payload as unknown as IOrgByYearsDto[];
             })
-            .addCase(fetchFiveAll.rejected, (state, action) => {
+            .addCase(fetchAttackYear.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
                 state.data = [];
@@ -48,4 +49,4 @@ const fiveAllSlice = createSlice({
     },
 });
 
-export default fiveAllSlice;
+export default attackYearSlice;

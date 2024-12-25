@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import {  IPeriodicTrendsDto, IPeriodicTrendsSafe} from "../types/safeTypes";
 
+export const base_url = "http://localhost:3000/api" //  `${base_url}/`
 
 const initialState: IPeriodicTrendsSafe = {
     error: false,
@@ -17,7 +18,7 @@ export const fetchPeriodicTrends = createAsyncThunk(
     async (_, thunkApi) => {
         try {
             const res = await fetch(
-                `${base_url}/analysis/highest-casualty-regions`
+                `${base_url}/analysis/incident-trends`
             );
             if (res.status != 200) {
                 thunkApi.rejectWithValue("Can't get the list, please try again");
@@ -46,19 +47,13 @@ const periodicTrendsSlice = createSlice({
                 state.error = false;
                 state.data = action.payload as unknown as IPeriodicTrendsDto[];
             })
-            .addCase(fetchPeriodicTrends.rejected, a() /* (state, action) => {
+            .addCase(fetchPeriodicTrends.rejected, (state, action) => {
                 state.loading = false
                 state.error = true
                 state.data = [];
-            }*/);
+            });
     },
 });
-function a () {
-    return  (state, action) => {
-        state.loading = false
-        state.error = true
-        state.data = [];
-    }
-}
+
 
 export default periodicTrendsSlice;

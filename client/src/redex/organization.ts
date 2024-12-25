@@ -1,18 +1,18 @@
 import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IFiveAllDto, IFiveAllSafe } from "../types/safeTypes";
+import { AttackOrganizationSafe, IDedlyOrgDto } from "../types/safeTypes";
 
-const initialState: IFiveAllSafe = {
+const initialState: AttackOrganizationSafe = {
     error: false,
     loading: true,
     data: [],
 };
 export const base_url = "http://localhost:3000/api" //  `${base_url}/`
 
-export const fetchFiveAll = createAsyncThunk(
-    "fiveAll/getList",
+export const fetchAttackOrganization = createAsyncThunk(
+    "attackOrganization/getList",
     async (_, thunkApi) => {
         try {
-            const res = await fetch(`${base_url}/relationships/top-groups`);
+            const res = await fetch(`${base_url}//relationships/deadliest-regions/`);
             if (res.status !== 200) {
                 return thunkApi.rejectWithValue("Can't get the list, please try again");
             }
@@ -24,23 +24,23 @@ export const fetchFiveAll = createAsyncThunk(
     }
 );
 
-const fiveAllSlice = createSlice({
-    name: "fiveAll",
+const attackOrganizationSlice = createSlice({
+    name: "attackOrganization",
     initialState,
     reducers: {},
-    extraReducers: (builder: ActionReducerMapBuilder<IFiveAllSafe>) => {
+    extraReducers: (builder: ActionReducerMapBuilder<AttackOrganizationSafe>) => {
         builder
-            .addCase(fetchFiveAll.pending, (state) => {
+            .addCase(fetchAttackOrganization.pending, (state) => {
                 state.loading = true;
                 state.error = false;
                 state.data = [];
             })
-            .addCase(fetchFiveAll.fulfilled, (state, action) => {
+            .addCase(fetchAttackOrganization.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = false;
-                state.data = action.payload as unknown as IFiveAllDto[];
+                state.data = action.payload as unknown as IDedlyOrgDto[];
             })
-            .addCase(fetchFiveAll.rejected, (state, action) => {
+            .addCase(fetchAttackOrganization.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
                 state.data = [];
@@ -48,4 +48,4 @@ const fiveAllSlice = createSlice({
     },
 });
 
-export default fiveAllSlice;
+export default attackOrganizationSlice;
